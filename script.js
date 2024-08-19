@@ -2,8 +2,11 @@ let dictionary = [];
 
 async function loadDictionary() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/kyhuber/Bee-Solver-Claude/dictionary.json');
-        dictionary = await response.json();
+        const response = await fetch('https://raw.githubusercontent.com/kyhuber/bee-solver-claude/main/clean_dictionary.txt');
+        const text = await response.text();
+        dictionary = new Set(text.split('\n')
+            .map(word => word.trim().toLowerCase())
+            .filter(word => word.length >= 4));
     } catch (error) {
         console.error('Error loading dictionary:', error);
     }
