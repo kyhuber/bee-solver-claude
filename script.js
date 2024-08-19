@@ -2,7 +2,7 @@ let dictionary = [];
 
 async function loadDictionary() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/kyhuber/bee-solver-claude/main/clean_dictionary.txt');
+        const response = await fetch('https://raw.githubusercontent.com/kyhuber/bee-solver-claude/main/cleaned_dictionary.txt');
         const text = await response.text();
         dictionary = new Set(text.split('\n')
             .map(word => word.trim().toLowerCase())
