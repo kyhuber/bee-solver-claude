@@ -2,7 +2,7 @@ let dictionary = [];
 
 async function loadDictionary() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/kyhuber/Bee-Solver/main/words_dictionary.json');
+        const response = await fetch('https://raw.githubusercontent.com/kyhuber/Bee-Solver-Claude/dictionary.json');
         dictionary = await response.json();
     } catch (error) {
         console.error('Error loading dictionary:', error);
