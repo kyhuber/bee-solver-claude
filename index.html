@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Bee Solver</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Spelling Bee Solver</h1>
+        <div class="hexagon-container">
+            <input type="text" class="hexagon outer" maxlength="1" id="letter1">
+            <input type="text" class="hexagon outer" maxlength="1" id="letter2">
+            <input type="text" class="hexagon outer" maxlength="1" id="letter3">
+            <input type="text" class="hexagon outer" maxlength="1" id="letter4">
+            <input type="text" class="hexagon outer" maxlength="1" id="letter5">
+            <input type="text" class="hexagon outer" maxlength="1" id="letter6">
+            <input type="text" class="hexagon center" maxlength="1" id="centerLetter">
+        </div>
+        <button id="solveButton">Find Solution Words</button>
+        <div id="solutionList"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
