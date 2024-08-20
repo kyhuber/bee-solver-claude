@@ -3,26 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spelling Bee Solver</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Claude Solves the Bee!</title>
+    <link rel="stylesheet" href="styles_vertical.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet"> <!-- Funky font -->
 </head>
 <body>
+    <header>
+        <h1>Claude Solves the Bee!</h1> <!-- Header with funky font -->
+    </header>
     <div class="container">
-        <h1>Spelling Bee Solver</h1>
-        <div class="hexagon-container">
-            <input type="text" class="hexagon outer" maxlength="1" id="letter1">
-            <input type="text" class="hexagon outer" maxlength="1" id="letter2">
-            <input type="text" class="hexagon outer" maxlength="1" id="letter3">
-            <input type="text" class="hexagon outer" maxlength="1" id="letter4">
-            <input type="text" class="hexagon outer" maxlength="1" id="letter5">
-            <input type="text" class="hexagon outer" maxlength="1" id="letter6">
-            <input type="text" class="hexagon center" maxlength="1" id="centerLetter">
+        <div class="input-container">
+            <input type="text" class="letter-input center-letter" placeholder="?" maxlength="1" id="centerLetter">
+            <div class="other-letters">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter1">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter2">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter3">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter4">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter5">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter6">
+            </div>
         </div>
         <button id="solveButton">Find Solution Words</button>
-        <div id="solutionList"></div>
+        <div class="solutions">
+            <div class="solution-container">
+                <h2>Words for Laypeople</h2>
+                <div class="solutionList" id="solutionListPopular">
+                    <!-- Word list gets appended here -->
+                </div>
+            </div>
+            <div class="solution-container">
+                <h2>Full Dictionary</h2>
+                <div class="solutionList" id="solutionListGeneral">
+                    <!-- Word list gets appended here -->
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="script.js"></script>
+    <script src="script_vertical.js"></script>
 </body>
+<footer>
+    <p>Made with <span class="emoji">❤️</span> by K&AI</p>
+</footer>
 </html>
-
-==
