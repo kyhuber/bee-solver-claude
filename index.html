@@ -13,20 +13,32 @@
     </header>
     <div class="container">
         <div class="input-container">
-            <input type="text" class="letter-input center-letter" placeholder="?" maxlength="1" id="centerLetter">
+            <input type="text" class="letter-input center-letter" placeholder="?" maxlength="1" id="centerLetter" tabindex="1">
             <div class="other-letters">
-                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter1">
-                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter2">
-                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter3">
-                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter4">
-                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter5">
-                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter6">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter1" tabindex="2" autofocus>
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter2" tabindex="3">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter3" tabindex="4">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter4" tabindex="5">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter5" tabindex="6">
+                <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter6" tabindex="7">
             </div>
         </div>
-        <button id="solveButton">Find Solution Words</button>
+        <button id="solveButton" tabindex="8">Solve it!</button>
+        <div class="solution-container">
+            <div class="solution-header">
+                <h2>Pangrams</h2>
+                <label class="switch">
+                    <input type="checkbox" id="pangramToggle">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="solutionList" id="solutionListPangrams">
+                <!-- Pangrams will be displayed here -->
+            </div>
+        </div>
         <div class="solutions">
             <div class="solution-container">
-                <h2>Words for Laypeople</h2>
+                <h2>Popular Words</h2>
                 <div class="solutionList" id="solutionListPopular">
                     <!-- Word list gets appended here -->
                 </div>
