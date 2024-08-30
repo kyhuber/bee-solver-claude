@@ -1758,10 +1758,8 @@ acknown
 acknowne
 acknows
 aclinic
-acmatic
 acme
 acmes
-acmic
 acmite
 acmites
 acne
@@ -6706,7 +6704,6 @@ amethysts
 ametropia
 ametropias
 ametropic
-amia
 amiabilities
 amiability
 amiable
@@ -6720,7 +6717,6 @@ amianthus
 amianthuses
 amiantus
 amiantuses
-amias
 amicabilities
 amicability
 amicable
@@ -6729,7 +6725,6 @@ amicablenesses
 amicably
 amice
 amices
-amici
 amicus
 amid
 amidase
@@ -6803,7 +6798,6 @@ amissing
 amities
 amitoses
 amitosis
-amitotic
 amitotically
 amitriptyline
 amitriptylines
@@ -13916,12 +13910,6 @@ atavist
 atavistic
 atavistically
 atavists
-ataxia
-ataxias
-ataxic
-ataxics
-ataxies
-ataxy
 atchieve
 atchieved
 atchieves
@@ -31835,6 +31823,7 @@ camerlingos
 cames
 camese
 cameses
+cami
 camiknickers
 camiknicks
 camion
@@ -44685,13 +44674,9 @@ committeewomen
 committer
 committers
 committing
-commix
 commixed
 commixes
 commixing
-commixt
-commixtion
-commixtions
 commixture
 commixtures
 commo
