@@ -73,6 +73,25 @@ function findWords(dictionary, letters) {
     );
 }
 
+function clearInputs() {
+    const letterInputs = document.querySelectorAll('.letter-input');
+    letterInputs.forEach(input => {
+        input.value = '';
+    });
+    document.getElementById('centerLetter').focus();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadDictionaries();
+    document.getElementById('solveButton').addEventListener('click', findSolutionWords);
+    document.getElementById('clearButton').addEventListener('click', clearInputs);
+    document.getElementById('pangramToggle').addEventListener('change', togglePangramVisibility);
+    const letterInputs = document.querySelectorAll('.letter-input');
+    letterInputs.forEach(input => {
+        input.addEventListener('input', handleLetterInput);
+    });
+});
+
 function findPangrams(words, letters) {
     return words.filter(word => {
         const uniqueLetters = new Set(word.split(''));
