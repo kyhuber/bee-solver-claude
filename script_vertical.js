@@ -79,6 +79,11 @@ function clearInputs() {
         input.value = '';
     });
     document.getElementById('centerLetter').focus();
+
+    const solutionLists = document.querySelectorAll('.solutionList');
+    solutionLists.forEach(list => {
+        list.innerHTML = '';
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
