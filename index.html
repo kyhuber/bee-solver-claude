@@ -24,11 +24,12 @@
                 <input type="text" class="letter-input" placeholder="?" maxlength="1" id="letter6" tabindex="7">
             </div>
         </div>
-        <button-solve id="solveButton" tabindex="8">Solve it!</button-solve>
-        <button id="clearButton" tabindex="9">Clear</button>
+        <p class="status-message" id="statusMessage">Loading dictionaries…</p>
+        <button type="button" id="solveButton" class="solve-button" tabindex="8" disabled>Solve it!</button>
+        <button type="button" id="clearButton" class="clear-button" tabindex="9">Clear</button>
         <div class="solution-container">
             <div class="solution-header">
-                <h2>Pangrams</h2>
+                <h2>Pangrams <span id="pangramCount" class="count-display">(0)</span></h2>
                 <label class="switch">
                     <input type="checkbox" id="pangramToggle">
                     <span class="slider round"></span>
@@ -40,22 +41,22 @@
         </div>
         <div class="solutions">
             <div class="solution-container">
-                <h2>Popular Words</h2>
+                <h2>Popular Words <span id="popularCount" class="count-display">(0)</span></h2>
                 <div class="solutionList" id="solutionListPopular">
                     <!-- Word list gets appended here -->
                 </div>
             </div>
             <div class="solution-container">
-                <h2>Full Dictionary</h2>
+                <h2>Other Words <span id="generalCount" class="count-display">(0)</span></h2>
                 <div class="solutionList" id="solutionListGeneral">
                     <!-- Word list gets appended here -->
                 </div>
             </div>
         </div>
     </div>
-    <script src="script_vertical.js"></script>
+    <footer>
+        <p>Made with <span class="emoji">❤️</span> by K&AI</p>
+    </footer>
+    <script src="script_vertical.js?v=2"></script>
 </body>
-<footer>
-    <p>Made with <span class="emoji">❤️</span> by K&AI</p>
-</footer>
 </html>

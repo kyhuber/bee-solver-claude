@@ -1,8 +1,9 @@
 let dictionaryGeneral = new Set();
 let dictionaryPopular = new Set();
-let dictionaryPangrams = new Set();
 
 async function loadDictionaries() {
+    const statusEl = document.getElementById('statusMessage');
+    const solveBtn = document.getElementById('solveButton');
     try {
         const responseGeneral = await fetch('cleaned_dictionary.txt');
         const textGeneral = await responseGeneral.text();
@@ -12,16 +13,18 @@ async function loadDictionaries() {
         const textPopular = await responsePopular.text();
         dictionaryPopular = new Set(textPopular.split('\n').map(word => word.trim().toLowerCase()));
 
-        const responsePangrams = await fetch('cleaned_pangrams.txt');
-        const textPangrams = await responsePangrams.text();
-        dictionaryPangrams = new Set(textPangrams.split('\n').map(word => word.trim().toLowerCase()));
+        statusEl.textContent = '';
+        statusEl.classList.add('loaded');
+        solveBtn.disabled = false;
     } catch (error) {
         console.error('Error loading dictionaries:', error);
+        statusEl.textContent = 'Could not load word lists. Check that cleaned_dictionary.txt and cleaned_popular.txt are present.';
+        statusEl.classList.add('error');
     }
 }
 
-function findSolutionWords() {
-    const letters = [
+function getLetters() {
+    return [
         document.getElementById('centerLetter').value,
         document.getElementById('letter1').value,
         document.getElementById('letter2').value,
@@ -29,16 +32,41 @@ function findSolutionWords() {
         document.getElementById('letter4').value,
         document.getElementById('letter5').value,
         document.getElementById('letter6').value
-    ].map(letter => letter.toLowerCase());
+    ].map(letter => letter.trim().toLowerCase());
+}
+
+function findSolutionWords() {
+    const letters = getLetters();
+    const validLetters = letters.filter(c => c.length === 1 && /^[a-z]$/.test(c));
+    if (validLetters.length !== 7) {
+        alert('Please enter exactly 7 letters (A–Z): one center letter and six outer letters.');
+        return;
+    }
+    if (new Set(validLetters).size !== 7) {
+        alert('All 7 letters must be different.');
+        return;
+    }
 
     const solutionWordsGeneral = findWords(dictionaryGeneral, letters);
     const solutionWordsPopular = findWords(dictionaryPopular, letters);
     const pangrams = findPangrams(solutionWordsGeneral, letters);
 
-    displaySolutionWords(solutionWordsGeneral, 'solutionListGeneral');
-    displaySolutionWords(solutionWordsPopular, 'solutionListPopular');
-    displaySolutionWords(pangrams, 'solutionListPangrams');
+    // Right column: all words that are NOT in popular (no duplication)
+    const popularSet = new Set(solutionWordsPopular);
+    const solutionWordsOther = solutionWordsGeneral.filter(word => !popularSet.has(word));
+
+    const sortWords = (arr) => [...arr].sort((a, b) => a.localeCompare(b));
+    displaySolutionWords(sortWords(solutionWordsPopular), 'solutionListPopular');
+    displaySolutionWords(sortWords(solutionWordsOther), 'solutionListGeneral');
+    displaySolutionWords(sortWords(pangrams), 'solutionListPangrams');
+    updateCounts(pangrams.length, solutionWordsPopular.length, solutionWordsOther.length);
     togglePangramVisibility();
+}
+
+function updateCounts(pangramCount, popularCount, generalCount) {
+    document.getElementById('pangramCount').textContent = `(${pangramCount})`;
+    document.getElementById('popularCount').textContent = `(${popularCount})`;
+    document.getElementById('generalCount').textContent = `(${generalCount})`;
 }
 
 function togglePangramVisibility() {
@@ -54,15 +82,34 @@ function togglePangramVisibility() {
 
 function handleLetterInput(event) {
     const currentInput = event.target;
-    const currentIndex = parseInt(currentInput.getAttribute('tabindex'));
+    const key = event.key;
+    const value = currentInput.value;
 
-    if (event.key === 'Enter' || currentInput.value.length === 1) {
+    // Restrict to single A–Z letter
+    if (value.length > 0) {
+        const lastChar = value.slice(-1).toUpperCase();
+        if (!/^[A-Z]$/.test(lastChar)) {
+            currentInput.value = value.slice(0, -1).replace(/[^a-zA-Z]/g, '');
+            return;
+        }
+        currentInput.value = lastChar;
+    }
+
+    const currentIndex = parseInt(currentInput.getAttribute('tabindex'));
+    if (key === 'Enter' || currentInput.value.length === 1) {
         const nextInput = document.querySelector(`input[tabindex="${currentIndex + 1}"]`);
         if (nextInput) {
             nextInput.focus();
         } else {
             document.getElementById('solveButton').focus();
         }
+    }
+}
+
+function handleLetterKeydown(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        handleLetterInput(event);
     }
 }
 
@@ -84,6 +131,7 @@ function clearInputs() {
     solutionLists.forEach(list => {
         list.innerHTML = '';
     });
+    updateCounts(0, 0, 0);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -94,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const letterInputs = document.querySelectorAll('.letter-input');
     letterInputs.forEach(input => {
         input.addEventListener('input', handleLetterInput);
+        input.addEventListener('keydown', handleLetterKeydown);
     });
 });
 
@@ -120,13 +169,3 @@ function displaySolutionWords(words, elementId) {
         solutionList.appendChild(wordList);
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadDictionaries();
-    document.getElementById('solveButton').addEventListener('click', findSolutionWords);
-    document.getElementById('pangramToggle').addEventListener('change', togglePangramVisibility);
-    const letterInputs = document.querySelectorAll('.letter-input');
-    letterInputs.forEach(input => {
-        input.addEventListener('input', handleLetterInput);
-    });
-});
