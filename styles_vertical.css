@@ -36,35 +36,56 @@ header h1 {
 
 .input-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
+.hexagon-grid {
+    position: relative;
+    width: 212px;
+    height: 202px;
+}
+
 .letter-input, .center-letter {
-    width: 50px;
-    height: 50px;
-    padding: 8px;
-    margin: 5px 0;
-    font-size: 16px;
-    border: 2px solid #E0E0E0;
-    border-radius: 4px;
+    position: absolute;
+    width: 68px;
+    height: 78px;
+    padding: 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
     text-align: center;
     box-sizing: border-box;
-    transition: all 0.3s ease;
     outline: none;
-    background-color: #FAFAFA;
+    background-color: #E0E0E0;
     color: #333;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    transition: background-color 0.2s ease, filter 0.2s ease;
+    cursor: pointer;
 }
 
 .letter-input:focus, .center-letter:focus {
-    border-color: #4CAF50;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.7));
+    background-color: #d0d0d0;
 }
 
 .center-letter {
-    background-color: #FFF9C4;
+    background-color: #FDD835;
 }
+
+.center-letter:focus {
+    background-color: #FBC02D;
+}
+
+/* Hexagon positions: top row (2), middle row (3), bottom row (2) */
+#letter1 { left: 36px; top: 0; }
+#letter2 { left: 108px; top: 0; }
+#letter6 { left: 0; top: 62px; }
+#centerLetter { left: 72px; top: 62px; }
+#letter3 { left: 144px; top: 62px; }
+#letter5 { left: 36px; top: 124px; }
+#letter4 { left: 108px; top: 124px; }
 
 .solve-button {
     font-size: 18px;
